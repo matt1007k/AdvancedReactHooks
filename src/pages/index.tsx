@@ -1,19 +1,21 @@
 import * as React from "react"
 import styled from "styled-components"
+
+import { useWindowSize } from "react-use"
+import { graphql } from "gatsby"
+
 import FlutterBuild from "../components/builds/FlutterBuild"
 import PurchaseButton from "../components/buttons/PurchaseButton"
 import CourseCard from "../components/card/CourseCard"
-
-import { useWindowSize } from "react-use"
 import GridSection from "../components/setions/GridSection"
-import { graphql } from "gatsby"
+
 const IndexPage = ({ data }) => {
   const { width } = useWindowSize()
   const title = data.allContentfulCourse.edges[0].node.title
   const description = data.allContentfulCourse.edges[0].node.description
   const illustration =
     data.allContentfulCourse.edges[0].node.illustration.file.url
-  // const illustration = ""
+  const sections = data.allContentfulCourse.edges[0].node.sections
 
   return (
     <Wrapper>
@@ -36,7 +38,7 @@ const IndexPage = ({ data }) => {
         </TextWrapper>
       </HeroWrapper>
       <Divider />
-      <GridSection />
+      <GridSection sections={sections} />
       <FlutterWrapper width={width}>
         <FlutterBuild />
       </FlutterWrapper>
@@ -59,6 +61,7 @@ export const query = graphql`
             }
           }
           sections {
+            slug
             title
             description
             duration
