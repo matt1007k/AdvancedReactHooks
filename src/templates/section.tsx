@@ -6,7 +6,6 @@ import { graphql } from "gatsby"
 function Section(props) {
   const { data } = props
   const sectionData = data.contentfulSection
-  console.log(sectionData)
 
   return (
     <Wrapper>
